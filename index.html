@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TechShop - Головна</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header class="header">
+
+        <button class="menu-toggle" aria-label="Відкрити меню">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" width="24" height="24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+            </svg>
+        </button>
+
+        <div class="logo">TechShop</div>
+        
+        <nav class="main-nav">
+            <ul class="nav-list">
+                <li><a href="#">Головна</a></li>
+                <li><a href="#">Каталог</a></li>
+                <li><a href="#">Про нас</a></li>
+            </ul>
+        </nav>
+
+        <div class="user-actions">
+            <button class="btn-cart-kosh">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" width="24" height="24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z" />
+                </svg>
+                Кошик (0)
+            </button>
+        </div>
+    </header>
+
+    <main class="page-layout">
+        <aside class="sidebar">
+            <h3>Фільтри</h3>
+            <ul>
+                <li><input type="checkbox"> Ноутбуки</li>
+                <li><input type="checkbox"> Смартфони</li>
+                <li><input type="checkbox"> Навушники</li>
+            </ul>
+        </aside>
+
+        <section class="products-content">
+            <h2>Популярні товари</h2>
+            
+            <div class="products-grid">
+                <div class="product-card">
+                    <img src="img/GalaxyS21.webp" alt="Смартфон Galaxy S21" class="product-img">
+                    <h3 class="product-title">Смартфон Galaxy S21</h3>
+                    <p class="product-desc">Потужний процесор та неймовірна камера.</p>
+                    <span class="product-price">25 000 грн</span>
+                    <button class="btn-buy">Купити</button>
+                </div>
+
+                <div class="product-card">
+                    <img src="img/AsusZenBook.webp" alt="Ноутбук Asus" class="product-img">
+                    <h3 class="product-title">Ноутбук Asus ZenBook</h3>
+                    <p class="product-desc">Ідеальний для роботи та навчання. Легкий та швидкий.</p>
+                    <span class="product-price">35 000 грн</span>
+                    <button class="btn-buy">Купити</button>
+                </div>
+
+                <div class="product-card">
+                    <img src="img/SonyWH-1000XM4.webp" alt="Навушники Sony" class="product-img">
+                    <h3 class="product-title">Навушники Sony WH-1000XM4</h3>
+                    <p class="product-desc">Найкраще шумозаглушення та чистий звук.</p>
+                    <span class="product-price">12 000 грн</span>
+                    <button class="btn-buy">Купити</button>
+                </div>
+
+                <div class="product-card">
+                    <img src="img/AWS8.webp" alt="Смарт-годинник" class="product-img">
+                    <h3 class="product-title">Apple Watch Series 8</h3>
+                    <p class="product-desc">Надійний фітнес-трекер та помічник на щодень.</p>
+                    <span class="product-price">18 000 грн</span>
+                    <button class="btn-buy">Купити</button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <p>&copy; 2026 TechShop. Всі права захищені.</p>
+            
+            <ul class="social-links">
+                <li>
+                    <a href="#" aria-label="Telegram">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 0C5.37 0 0 5.37 0 12s5.37 12 12 12 12-5.37 12-12S18.63 0 12 0zm5.56 8.16l-1.9 8.94c-.15.65-.53.81-1.07.51l-2.96-2.18-1.43 1.38c-.16.16-.29.29-.6.29l.21-3.03 5.52-4.98c.24-.21-.05-.33-.37-.11l-6.82 4.29-2.93-.91c-.64-.2-.65-.64.13-.95l11.46-4.42c.53-.19 1 .12.83 1.17z"/>
+                        </svg>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" aria-label="Instagram">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 2.16c3.2 0 3.58.01 4.85.07 3.25.15 4.77 1.69 4.92 4.92.06 1.27.07 1.65.07 4.85s-.01 3.58-.07 4.85c-.15 3.23-1.66 4.77-4.92 4.92-1.27.06-1.64.07-4.85.07s-3.58-.01-4.85-.07c-3.26-.15-4.77-1.7-4.92-4.92-.06-1.27-.07-1.64-.07-4.85s.01-3.58.07-4.85c.15-3.23 1.66-4.77 4.92-4.92 1.27-.06 1.65-.07 4.85-.07M12 0C8.74 0 8.33.01 7.05.07 2.76.27.27 2.76.07 7.05.01 8.33 0 8.74 0 12s.01 3.67.07 4.95c.2 4.29 2.69 6.78 6.98 6.98 1.28.06 1.69.07 4.95.07s3.67-.01 4.95-.07c4.29-.2 6.78-2.69 6.98-6.98.06-1.28.07-1.69.07-4.95s-.01-3.67-.07-4.95c-.2-4.29-2.69-6.78-6.98-6.98C15.67.01 15.26 0 12 0zm0 5.84A6.16 6.16 0 1018.16 12 6.16 6.16 0 0012 5.84zm0 10.16A4 4 0 1116 12a4 4 0 01-4 4zm6.4-10.4a1.44 1.44 0 11-2.88 0 1.44 1.44 0 012.88 0z"/>
+                        </svg>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" aria-label="YouTube">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M23.5 6.18a3 3 0 00-2.11-2.11C19.53 3.5 12 3.5 12 3.5s-7.53 0-9.39.57A3 3 0 00.5 6.18C0 8.04 0 12 0 12s0 3.96.5 5.82a3 3 0 002.11 2.11C4.47 20.5 12 20.5 12 20.5s7.53 0 9.39-.57a3 3 0 002.11-2.11c.5-1.86.5-5.82.5-5.82s0-3.96-.5-5.82zM9.5 15.5v-7l6.5 3.5-6.5 3.5z"/>
+                        </svg>
+                    </a>
+                </li>
+            </ul>
+
+            <ul class="footer-links">
+                <li><a href="#">Політика конфіденційності</a></li>
+                <li><a href="#">Умови використання</a></li>
+            </ul>
+        </div>
+    </footer>
+
+</body>
+</html>
