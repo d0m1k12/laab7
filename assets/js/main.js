@@ -49,6 +49,8 @@ const products = [
   }
 ];
 
+let cart = [];
+
 const container = document.querySelector(".products-grid");
 
 const htmlString = products.map((product) => {
@@ -64,3 +66,63 @@ const htmlString = products.map((product) => {
 }).join("");
 
 container.innerHTML = htmlString;
+
+container.addEventListener("click", function (event) {
+  //console.log(event.target);
+
+  //console.log(event.target.classList);
+
+  if (event.target.classList.contains("btn-buy")) {
+    const productId = parseInt(event.target.dataset.id);
+
+    //const selectedProduct = products.find(
+    //  function (product) {
+    //    if (product.id === productId) {
+    //      return true;
+    //    }
+    //  }
+    //);
+
+    const selectedProduct = products.find(p => p.id === productId);
+
+    //console.log(selectedProduct);
+
+    addToCart(selectedProduct);
+  }
+});
+
+function addToCart(product) {
+  const existingProduct = cart.find(p => p.id === product.id);
+
+  if (existingProduct) {
+    existingProduct.quantity += 1;
+  } else {
+    cart.push({ ...product, quantity: 1 });
+  }
+
+  updateUI();
+}
+
+function calculateTotal() {
+  return cart.reduce(
+    (total, product) => total + product.price * product.quantity, 0);
+}
+
+function updateUI() {
+
+  const numElement = document.getElementById("num");
+  const totalElement = document.getElementById("total");
+
+  const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+
+  if (numElement) {
+    numElement.textContent = totalItems;
+  }
+
+  if (totalElement) {
+    totalElement.textContent = calculateTotal();
+  }
+
+  console.log("Поточний кошик:", cart);
+  console.log("Загальна сума:", calculateTotal(), "грн");
+}
