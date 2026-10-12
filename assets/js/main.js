@@ -51,6 +51,9 @@ const products = [
 
 let cart = [];
 
+const container = document.querySelector(".products-grid");
+const loader = document.getElementById("loader");
+
 function fetchProducts() {
   return new Promise((resolve, reject) => {
     setTimeout(() => {
@@ -60,16 +63,13 @@ function fetchProducts() {
 }
 
 async function initShop() {
-  const loader = document.getElementById("loader");
-  const container = document.querySelector(".products-grid");
-
-  loader.classList.remove("hidden");
-  container.innerHTML = "";
+  if (loader) loader.classList.remove("hidden");
+  if (container) container.innerHTML = "";
 
   try {
     const data = await fetchProducts();
-
-    loader.classList.add("hidden");
+    
+    if (loader) loader.classList.add("hidden");
 
     const htmlString = data.map((product) => {
         return `
@@ -83,39 +83,27 @@ async function initShop() {
         `;
     }).join("");
 
-    container.innerHTML = htmlString;
+    if (container) container.innerHTML = htmlString;
 
   } catch (error) {
-    loader.classList.add("hidden");
-    container.innerHTML = `<p class="error">Помилка: ${error.message}</p>`;
+    if (loader) loader.classList.add("hidden");
+    if (container) container.innerHTML = `<p class="error">Помилка: ${error.message}</p>`;
   }
 }
 
 initShop();
 
-container.addEventListener("click", function (event) {
-  //console.log(event.target);
-
-  //console.log(event.target.classList);
-
-  if (event.target.classList.contains("btn-buy")) {
-    const productId = parseInt(event.target.dataset.id);
-
-    //const selectedProduct = products.find(
-    //  function (product) {
-    //    if (product.id === productId) {
-    //      return true;
-    //    }
-    //  }
-    //);
-
-    const selectedProduct = products.find(p => p.id === productId);
-
-    //console.log(selectedProduct);
-
-    addToCart(selectedProduct);
-  }
-});
+if (container) {
+  container.addEventListener("click", function (event) {
+    if (event.target.classList.contains("btn-buy")) {
+      const productId = parseInt(event.target.dataset.id);
+      const selectedProduct = products.find(p => p.id === productId);
+      if (selectedProduct) {
+        addToCart(selectedProduct);
+      }
+    }
+  });
+}
 
 function addToCart(product) {
   const existingProduct = cart.find(p => p.id === product.id);
@@ -134,8 +122,62 @@ function calculateTotal() {
     (total, product) => total + product.price * product.quantity, 0);
 }
 
-function updateUI() {
+function renderCartItems() {
+  const cartItemsContainer = document.getElementById("cartItemsContainer");
+  const cartTotalSum = document.getElementById("cartTotalSum");
 
+  if (!cartItemsContainer || !cartTotalSum) return;
+
+  if (cart.length === 0) {
+    cartItemsContainer.innerHTML = `<p>Кошик порожній.</p>`;
+    cartTotalSum.textContent = "0";
+    return;
+  }
+
+  const html = cart.map(item => `
+    <div class="cart-item">
+      <div>
+        <h4>${item.title}</h4>
+        <p>${item.price} грн x ${item.quantity} = <strong>${item.price * item.quantity} грн</strong></p>
+      </div>
+      <div class="cart-item-controls">
+        <button class="btn-decrease" data-id="${item.id}">-</button>
+        <span>${item.quantity}</span>
+        <button class="btn-increase" data-id="${item.id}">+</button>
+        <button class="btn-remove" data-id="${item.id}">Видалити</button>
+      </div>
+    </div>
+  `).join("");
+
+  cartItemsContainer.innerHTML = html;
+  cartTotalSum.textContent = calculateTotal();
+}
+
+const cartItemsContainer = document.getElementById("cartItemsContainer");
+if (cartItemsContainer) {
+  cartItemsContainer.addEventListener("click", function (event) {
+    const id = parseInt(event.target.dataset.id);
+    if (!id) return;
+
+    const product = cart.find(p => p.id === id);
+    if (!product) return;
+
+    if (event.target.classList.contains("btn-increase")) {
+      product.quantity += 1;
+    } else if (event.target.classList.contains("btn-decrease")) {
+      product.quantity -= 1;
+      if (product.quantity <= 0) {
+        cart = cart.filter(p => p.id !== id);
+      }
+    } else if (event.target.classList.contains("btn-remove")) {
+      cart = cart.filter(p => p.id !== id);
+    }
+
+    updateUI();
+  });
+}
+
+function updateUI() {
   const numElement = document.getElementById("num");
   const totalElement = document.getElementById("total");
 
@@ -149,6 +191,38 @@ function updateUI() {
     totalElement.textContent = calculateTotal();
   }
 
-  console.log("Поточний кошик:", cart);
-  console.log("Загальна сума:", calculateTotal(), "грн");
+  renderCartItems();
+}
+
+const cartButton = document.querySelector(".btn-cart");
+const cartOverlay = document.getElementById("cartOverlay");
+const closeBtn = document.getElementById("closeCartBtn");
+
+function openCartModal() {
+  if (cartOverlay) {
+    cartOverlay.classList.remove("hidden");
+    renderCartItems();
+  }
+}
+
+function closeCartModal() {
+  if (cartOverlay) {
+    cartOverlay.classList.add("hidden");
+  }
+}
+
+if (cartButton) {
+  cartButton.addEventListener("click", openCartModal);
+}
+
+if (closeBtn) {
+  closeBtn.addEventListener("click", closeCartModal);
+}
+
+if (cartOverlay) {
+  cartOverlay.addEventListener("click", (event) => {
+    if (event.target === cartOverlay) {
+      closeCartModal();
+    }
+  });
 }

@@ -9,7 +9,6 @@
 <body>
 
     <header class="header">
-
         <button class="menu-toggle" aria-label="Відкрити меню">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" width="24" height="24">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
@@ -26,7 +25,8 @@
             </ul>
         </nav>
 
-        <div class="user-actions">
+        <!-- Додано клас btn-cart та курсор для зручності -->
+        <div class="user-actions btn-cart" style="cursor: pointer;">
             <p id="cart">Кошик: <span id="num">0</span> товарів | ціна <span id="total">0</span> грн</p>
         </div>
     </header>
@@ -43,12 +43,12 @@
 
         <section class="products-content">
             <h2>Популярні товари</h2>
-
+            
             <div class="loader-container" id="loader">
                 <div class="spinner"></div>
                 <p>Завантаження товарів...</p>
             </div>
-            
+
             <div class="products-grid" id="products-grid"></div>
         </section>
     </main>
@@ -87,6 +87,26 @@
             </ul>
         </div>
     </footer>
+
+    <!-- Модальне вікно кошика -->
+    <div class="modal-overlay hidden" id="cartOverlay">
+        <div class="modal-window">
+            <div class="modal-header">
+                <h2>Ваш Кошик</h2>
+                <button class="close-btn" id="closeCartBtn">&times;</button>
+            </div>
+
+            <div class="cart-items" id="cartItemsContainer">
+                <p>Кошик порожній.</p>
+            </div>
+
+            <div class="modal-footer">
+                <h3>Разом: <span id="cartTotalSum">0</span> грн</h3>
+                <a href="checkout.html" class="btn btn-primary" id="checkoutBtn">Оформити замовлення</a>
+            </div>
+        </div>
+    </div>
+
 <script src="./assets/js/main.js" type="module"></script>
 </body>
 </html>
