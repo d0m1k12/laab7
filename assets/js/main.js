@@ -51,21 +51,47 @@ const products = [
 
 let cart = [];
 
-const container = document.querySelector(".products-grid");
+function fetchProducts() {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      resolve(products);
+    }, 1500);
+  });
+}
 
-const htmlString = products.map((product) => {
-    return `
-        <div class="product-card">
-            <img src="${product.image}" alt="${product.title}" class="product-img">
-            <h3 class="product-title">${product.title}</h3>
-            <p class="product-desc">${product.desc}</p>
-            <span class="product-price">${product.price} грн</span>
-            <button class="btn-buy" data-id="${product.id}">Купити</button>
-        </div>
-    `;
-}).join("");
+async function initShop() {
+  const loader = document.getElementById("loader");
+  const container = document.querySelector(".products-grid");
 
-container.innerHTML = htmlString;
+  loader.classList.remove("hidden");
+  container.innerHTML = "";
+
+  try {
+    const data = await fetchProducts();
+
+    loader.classList.add("hidden");
+
+    const htmlString = data.map((product) => {
+        return `
+            <div class="product-card">
+                <img src="${product.image}" alt="${product.title}" class="product-img">
+                <h3 class="product-title">${product.title}</h3>
+                <p class="product-desc">${product.desc}</p>
+                <span class="product-price">${product.price} грн</span>
+                <button class="btn-buy" data-id="${product.id}">Купити</button>
+            </div>
+        `;
+    }).join("");
+
+    container.innerHTML = htmlString;
+
+  } catch (error) {
+    loader.classList.add("hidden");
+    container.innerHTML = `<p class="error">Помилка: ${error.message}</p>`;
+  }
+}
+
+initShop();
 
 container.addEventListener("click", function (event) {
   //console.log(event.target);
