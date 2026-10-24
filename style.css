@@ -225,8 +225,7 @@
     cursor: pointer;
     color: #333;
   }
-
-  /* Стилі для модального вікна кошика */
+  
 .modal-overlay {
     position: fixed;
     top: 0;
