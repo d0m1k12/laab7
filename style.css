@@ -98,7 +98,7 @@
   
   .products-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr); 
+  grid-template-columns: repeat(3, 1fr); 
   gap: 20px;
 }
   
@@ -225,7 +225,7 @@
     cursor: pointer;
     color: #333;
   }
-  
+
 .modal-overlay {
     position: fixed;
     top: 0;
@@ -320,6 +320,44 @@
 .hidden {
     display: none !important;
     opacity: 0;
+}
+
+.favorites-zone {
+    border: 2px dashed #ccc;
+    padding: 10px;
+    background-color: #f9f9f9;
+    text-align: center;
+    border-radius: 8px;
+    min-width: 250px;
+    min-height: 45px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    transition: background-color 0.3s, border-color 0.3s;
+    font-size: 14px;
+    color: #555;
+}
+
+/* Колір при наведенні товару над зоною */
+.favorites-zone.drag-over {
+    background-color: #e0f7fa;
+    border-color: #00bcd4;
+}
+
+/* Напівпрозорість картки, яку зараз тягнуть */
+.dragging {
+    opacity: 0.5;
+}
+
+/* Стиль для елемента, що впав у зону */
+.fav-item {
+    background: #fff;
+    border: 1px solid #ddd;
+    padding: 4px 8px;
+    margin-top: 5px;
+    border-radius: 4px;
+    font-size: 13px;
+    color: #333;
 }
 
 

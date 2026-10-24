@@ -35,10 +35,9 @@ async function initShop() {
 
     const htmlString = data.map((product) => {
         return `
-            <div class="product-card">
+            <div class="product-card" draggable="true" data-id="${product.id}">
                 <img src="${product.image}" alt="${product.title}" class="product-img">
                 <h3 class="product-title">${product.title}</h3>
-                <p class="product-desc">${product.description}</p>
                 <span class="product-price">$${product.price}</span>
                 <button class="btn-buy" data-id="${product.id}">Купити</button>
             </div>
@@ -65,7 +64,43 @@ if (container) {
       }
     }
   });
+
+  container.addEventListener("dragstart", (event) => {
+    if (event.target.classList.contains("product-card")) {
+      event.dataTransfer.setData("text/plain", event.target.dataset.id);
+      event.target.classList.add("dragging");
+    }
+  });
+
+  container.addEventListener("dragend", (event) => {
+    if (event.target.classList.contains("product-card")) {
+      event.target.classList.remove("dragging");
+    }
+  });
 }
+
+const favoritesZone = document.getElementById("favoritesZone");
+if (favoritesZone) {
+  favoritesZone.addEventListener("dragover", (event) => {
+    event.preventDefault(); 
+    favoritesZone.classList.add("drag-over");
+  });
+
+  favoritesZone.addEventListener("dragleave", () => {
+    favoritesZone.classList.remove("drag-over");
+  });
+
+  favoritesZone.addEventListener("drop", (event) => {
+    event.preventDefault();
+    favoritesZone.classList.remove("drag-over");
+
+    const productId = event.dataTransfer.getData("text/plain");
+    if (productId) {
+      favoritesZone.innerHTML += `<div class="fav-item">Товар #${productId} дод. в улюблене</div>`;
+    }
+  });
+}
+
 
 function addToCart(product) {
   const existingProduct = cart.find(p => p.id === product.id);

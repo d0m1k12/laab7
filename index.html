@@ -25,8 +25,15 @@
             </ul>
         </nav>
 
-        <div class="user-actions btn-cart" style="cursor: pointer;">
-            <p id="cart">Кошик: <span id="num">0</span> товарів | ціна <span id="total">0</span> $</p>
+        <div class="header-actions" style="display: flex; gap: 20px; align-items: center;">
+            
+            <div class="favorites-zone" id="favoritesZone">
+                <p>Перетягніть сюди товари в Улюблене</p>
+            </div>
+
+            <div class="user-actions btn-cart" style="cursor: pointer;">
+                <p id="cart">Кошик: <span id="num">0</span> товарів | ціна <span id="total">0</span> $</p>
+            </div>
         </div>
 
     </header>
@@ -101,7 +108,7 @@
             </div>
 
             <div class="modal-footer">
-                <h3>Разом: <span id="cartTotalSum">0</span> грн</h3>
+                <h3>Разом: <span id="cartTotalSum">0</span> $</h3>
                 <a href="checkout.html" class="btn btn-primary" id="checkoutBtn">Оформити замовлення</a>
             </div>
         </div>
