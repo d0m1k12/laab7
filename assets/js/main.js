@@ -1,73 +1,35 @@
-const products = [
-  {
-    id: 1,
-    title: "Смартфон Galaxy S21",
-    desc: "Потужний процесор та неймовірна камера.",
-    price: 25000,
-    category: "smartphones",
-    image: "img/GalaxyS21.webp"
-  },
-  {
-    id: 2,
-    title: "Ноутбук Asus ZenBook",
-    desc: "Ідеальний для роботи та навчання. Легкий та швидкий.",
-    price: 35000,
-    category: "laptops",
-    image: "img/AsusZenBook.webp"
-  },
-  {
-    id: 3,
-    title: "Навушники Sony WH-1000XM4",
-    desc: "Найкраще шумозаглушення та чистий звук.",
-    price: 12000,
-    category: "headphones",
-    image: "img/SonyWH-1000XM4.webp"
-  },
-  {
-    id: 4,
-    title: "Apple Watch Series 8",
-    desc: "Надійний фітнес-трекер та помічник на щодень.",
-    price: 18000,
-    category: "watches",
-    image: "img/AWS8.webp"
-  },
-  {
-    id: 5,
-    title: "Планшет Apple iPad Air",
-    desc: "Потужність ПК у компактному форматі.",
-    price: 28000,
-    category: "tablets",
-    image: "img/iPadAir.webp" 
-  },
-  {
-    id: 6,
-    title: "Миша Logitech MX Master 3S",
-    desc: "Ергономічна миша для професіоналів.",
-    price: 4500,
-    category: "accessories",
-    image: "img/LogitechMXMaster3S.webp"
-  }
-];
+let globalStoreProducts = [];
 
 let cart = [];
 
 const container = document.querySelector(".products-grid");
 const loader = document.getElementById("loader");
 
-function fetchProducts() {
-  return new Promise((resolve, reject) => {
-    setTimeout(() => {
-      resolve(products);
-    }, 1500);
-  });
+async function fetchProducts() {
+  try {
+    const response = await fetch("https://fakestoreapi.com/products?limit=8");
+
+    if (!response.ok) {
+      throw new Error(`HTTP помилка: ${response.status}`);
+    }
+
+    const realProducts = await response.json();
+    
+    return realProducts;
+  } catch (error) {
+    console.error("Помилка завантаження товарів:", error.message);
+    throw error;
+  }
 }
 
-async function initShop() {
+async function initShop() { 
   if (loader) loader.classList.remove("hidden");
   if (container) container.innerHTML = "";
 
   try {
     const data = await fetchProducts();
+
+    globalStoreProducts = data;
     
     if (loader) loader.classList.add("hidden");
 
@@ -76,14 +38,14 @@ async function initShop() {
             <div class="product-card">
                 <img src="${product.image}" alt="${product.title}" class="product-img">
                 <h3 class="product-title">${product.title}</h3>
-                <p class="product-desc">${product.desc}</p>
-                <span class="product-price">${product.price} грн</span>
+                <p class="product-desc">${product.description}</p>
+                <span class="product-price">$${product.price}</span>
                 <button class="btn-buy" data-id="${product.id}">Купити</button>
             </div>
         `;
     }).join("");
 
-    if (container) container.innerHTML = htmlString;
+    if (container) container.innerHTML = htmlString;  
 
   } catch (error) {
     if (loader) loader.classList.add("hidden");
@@ -97,7 +59,7 @@ if (container) {
   container.addEventListener("click", function (event) {
     if (event.target.classList.contains("btn-buy")) {
       const productId = parseInt(event.target.dataset.id);
-      const selectedProduct = products.find(p => p.id === productId);
+      const selectedProduct = globalStoreProducts.find(p => p.id === productId);
       if (selectedProduct) {
         addToCart(selectedProduct);
       }
@@ -138,7 +100,7 @@ function renderCartItems() {
     <div class="cart-item">
       <div>
         <h4>${item.title}</h4>
-        <p>${item.price} грн x ${item.quantity} = <strong>${item.price * item.quantity} грн</strong></p>
+        <p>$${item.price} x ${item.quantity} = <strong>$${item.price * item.quantity}</strong></p>
       </div>
       <div class="cart-item-controls">
         <button class="btn-decrease" data-id="${item.id}">-</button>
