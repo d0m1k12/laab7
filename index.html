@@ -49,6 +49,12 @@
         </aside>
 
         <section class="products-content">
+
+            <div class="search-bar" style="margin: 20px 0; display: flex; gap: 12px; align-items: center;">
+                <input type="text" id="searchInput" placeholder="Пошук товару..." style="padding: 10px; width: 320px; border: 1px solid #ccc; border-radius: 6px;">
+                <span id="searchResultCount" style="color: #666; font-size: 14px;"></span>
+            </div>
+
             <h2>Популярні товари</h2>
 
             <div class="loader-container" id="loader">
@@ -65,27 +71,9 @@
             <p>&copy; 2026 TechShop. Всі права захищені.</p>
             
             <ul class="social-links">
-                <li>
-                    <a href="#" aria-label="Telegram">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M12 0C5.37 0 0 5.37 0 12s5.37 12 12 12 12-5.37 12-12S18.63 0 12 0zm5.56 8.16l-1.9 8.94c-.15.65-.53.81-1.07.51l-2.96-2.18-1.43 1.38c-.16.16-.29.29-.6.29l.21-3.03 5.52-4.98c.24-.21-.05-.33-.37-.11l-6.82 4.29-2.93-.91c-.64-.2-.65-.64.13-.95l11.46-4.42c.53-.19 1 .12.83 1.17z"/>
-                        </svg>
-                    </a>
-                </li>
-                <li>
-                    <a href="#" aria-label="Instagram">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M12 2.16c3.2 0 3.58.01 4.85.07 3.25.15 4.77 1.69 4.92 4.92.06 1.27.07 1.65.07 4.85s-.01 3.58-.07 4.85c-.15 3.23-1.66 4.77-4.92 4.92-1.27.06-1.64.07-4.85.07s-3.58-.01-4.85-.07c-3.26-.15-4.77-1.7-4.92-4.92-.06-1.27-.07-1.64-.07-4.85s.01-3.58.07-4.85c.15-3.23 1.66-4.77 4.92-4.92 1.27-.06 1.65-.07 4.85-.07M12 0C8.74 0 8.33.01 7.05.07 2.76.27.27 2.76.07 7.05.01 8.33 0 8.74 0 12s.01 3.67.07 4.95c.2 4.29 2.69 6.78 6.98 6.98 1.28.06 1.69.07 4.95.07s3.67-.01 4.95-.07c4.29-.2 6.78-2.69 6.98-6.98.06-1.28.07-1.69.07-4.95s-.01-3.67-.07-4.95c-.2-4.29-2.69-6.78-6.98-6.98C15.67.01 15.26 0 12 0zm0 5.84A6.16 6.16 0 1018.16 12 6.16 6.16 0 0012 5.84zm0 10.16A4 4 0 1116 12a4 4 0 01-4 4zm6.4-10.4a1.44 1.44 0 11-2.88 0 1.44 1.44 0 012.88 0z"/>
-                        </svg>
-                    </a>
-                </li>
-                <li>
-                    <a href="#" aria-label="YouTube">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M23.5 6.18a3 3 0 00-2.11-2.11C19.53 3.5 12 3.5 12 3.5s-7.53 0-9.39.57A3 3 0 00.5 6.18C0 8.04 0 12 0 12s0 3.96.5 5.82a3 3 0 002.11 2.11C4.47 20.5 12 20.5 12 20.5s7.53 0 9.39-.57a3 3 0 002.11-2.11c.5-1.86.5-5.82.5-5.82s0-3.96-.5-5.82zM9.5 15.5v-7l6.5 3.5-6.5 3.5z"/>
-                        </svg>
-                    </a>
-                </li>
+                <li><a href="#" aria-label="Telegram"><svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M12 0C5.37 0 0 5.37 0 12s5.37 12 12 12 12-5.37 12-12S18.63 0 12 0zm5.56 8.16l-1.9 8.94c-.15.65-.53.81-1.07.51l-2.96-2.18-1.43 1.38c-.16.16-.29.29-.6.29l.21-3.03 5.52-4.98c.24-.21-.05-.33-.37-.11l-6.82 4.29-2.93-.91c-.64-.2-.65-.64.13-.95l11.46-4.42c.53-.19 1 .12.83 1.17z"/></svg></a></li>
+                <li><a href="#" aria-label="Instagram"><svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M12 2.16c3.2 0 3.58.01 4.85.07 3.25.15 4.77 1.69 4.92 4.92.06 1.27.07 1.65.07 4.85s-.01 3.58-.07 4.85c-.15 3.23-1.66 4.77-4.92 4.92-1.27.06-1.64.07-4.85.07s-3.58-.01-4.85-.07c-3.26-.15-4.77-1.7-4.92-4.92-.06-1.27-.07-1.64-.07-4.85s.01-3.58.07-4.85c.15-3.23 1.66-4.77 4.92-4.92 1.27-.06 1.65-.07 4.85-.07M12 0C8.74 0 8.33.01 7.05.07 2.76.27.27 2.76.07 7.05.01 8.33 0 8.74 0 12s.01 3.67.07 4.95c.2 4.29 2.69 6.78 6.98 6.98 1.28.06 1.69.07 4.95.07s3.67-.01 4.95-.07c4.29-.2 6.78-2.69 6.98-6.98.06-1.28.07-1.69.07-4.95s-.01-3.67-.07-4.95c-.2-4.29-2.69-6.78-6.98-6.98C15.67.01 15.26 0 12 0zm0 5.84A6.16 6.16 0 1018.16 12 6.16 6.16 0 0012 5.84zm0 10.16A4 4 0 1116 12a4 4 0 01-4 4zm6.4-10.4a1.44 1.44 0 11-2.88 0 1.44 1.44 0 012.88 0z"/></svg></a></li>
+                <li><a href="#" aria-label="YouTube"><svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M23.5 6.18a3 3 0 00-2.11-2.11C19.53 3.5 12 3.5 12 3.5s-7.53 0-9.39.57A3 3 0 00.5 6.18C0 8.04 0 12 0 12s0 3.96.5 5.82a3 3 0 002.11 2.11C4.47 20.5 12 20.5 12 20.5s7.53 0 9.39-.57a3 3 0 002.11-2.11c.5-1.86.5-5.82.5-5.82s0-3.96-.5-5.82zM9.5 15.5v-7l6.5 3.5-6.5 3.5z"/></svg></a></li>
             </ul>
 
             <ul class="footer-links">
@@ -107,9 +95,39 @@
                 <p>Кошик порожній.</p>
             </div>
 
-            <div class="modal-footer">
-                <h3>Разом: <span id="cartTotalSum">0</span> $</h3>
-                <a href="checkout.html" class="btn btn-primary" id="checkoutBtn">Оформити замовлення</a>
+            <!-- ЗМІНЕНО: display: block для правильного вирівнювання форми під сумою -->
+            <div class="modal-footer" style="display: block;">
+                <h3 style="margin-bottom: 15px;">Разом: <span id="cartTotalSum">0</span> $</h3>
+                
+                <!-- ДОДАНО: Форма оформлення замовлення (Крок 3) -->
+                <form id="checkoutOrderForm" novalidate style="margin-top: 15px; text-align: left;">
+                    <div class="form-row" style="margin-bottom: 12px;">
+                        <label for="clientName" style="display: block; margin-bottom: 4px;">ПІБ покупця:</label>
+                        <input type="text" id="clientName" name="clientName" placeholder="Коверко Дмитро Олександрович" required style="width: 100%; padding: 8px; box-sizing: border-box;">
+                        <span class="input-error" id="nameError" style="color: red; font-size: 13px;"></span>
+                    </div>
+
+                    <div class="form-row" style="margin-bottom: 12px;">
+                        <label for="clientPhone" style="display: block; margin-bottom: 4px;">Номер телефону (+380...):</label>
+                        <input type="tel" id="clientPhone" name="clientPhone" placeholder="+38 (066) 944-82-69" required style="width: 100%; padding: 8px; box-sizing: border-box;">
+                        <span class="input-error" id="phoneError" style="color: red; font-size: 13px;"></span>
+                    </div>
+
+                    <div class="form-row" style="margin-bottom: 12px;">
+                        <label for="clientEmail" style="display: block; margin-bottom: 4px;">Електронна пошта:</label>
+                        <input type="email" id="clientEmail" name="clientEmail" placeholder="lalala@example.com" required style="width: 100%; padding: 8px; box-sizing: border-box;">
+                        <span class="input-error" id="emailError" style="color: red; font-size: 13px;"></span>
+                    </div>
+
+                    <div class="form-row" style="margin-bottom: 16px;">
+                        <label for="orderPromo" style="display: block; margin-bottom: 4px;">Промокод (якщо є):</label>
+                        <input type="text" id="orderPromo" name="orderPromo" placeholder="Введіть SALE10 для знижки 10%" style="width: 100%; padding: 8px; box-sizing: border-box;">
+                    </div>
+
+                    <button type="submit" id="btnPlaceOrder" style="width: 100%; padding: 10px 20px; background: #28a745; color: white; border: none; border-radius: 6px; cursor: pointer; font-size: 16px;">
+                        Підтвердити замовлення
+                    </button>
+                </form>
             </div>
         </div>
     </div>
